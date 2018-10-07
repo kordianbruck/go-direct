@@ -1,13 +1,17 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
+	"os"
 )
 
 func main() {
-	http.HandleFunc("/", func (w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Location", os.Getenv("URL"))
+		w.WriteHeader(301)
 	})
-	http.ListenAndServe(":80", nil)
+
+	if err := http.ListenAndServe(":80", nil); err != nil {
+		panic(err)
+	}
 }
