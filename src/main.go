@@ -1,13 +1,12 @@
-package src
+package main
 
 import (
 	"net/http"
-	"os"
 )
 
 func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Location", os.Getenv("URL"))
+		w.Header().Set("Location", "https://google.com")
 		w.WriteHeader(301)
 	})
 

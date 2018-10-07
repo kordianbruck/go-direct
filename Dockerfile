@@ -1,9 +1,11 @@
 FROM golang:alpine as builder
-COPY ./src $GOPATH/src/mypackage/myapp/
-WORKDIR $GOPATH/src/mypackage/myapp/
-RUN go get -d -v
-RUN go build -o /go/bin/hello
 
-FROM scratch
-COPY --from=builder /go/bin/hello /go/bin/hello
-ENTRYPOINT ["/go/bin/hello"]
+COPY ./src $GOPATH/src/
+WORKDIR $GOPATH/src/
+
+RUN go build -o /go-direct
+RUN chmod +x /go-direct
+
+#FROM scratch
+#COPY --from=builder /go-direct /go-direct
+CMD ["/go-direct"]
