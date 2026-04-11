@@ -1,4 +1,4 @@
-FROM golang:1.25-alpine3.20 as builder
+FROM golang:1.25-alpine3.22 as builder
 
 COPY ./src $GOPATH/src/
 COPY go.mod $GOPATH/src/go.mod
